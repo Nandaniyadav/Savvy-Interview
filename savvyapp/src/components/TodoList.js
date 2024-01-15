@@ -1,18 +1,78 @@
-import React from "react";
+// import React, { useState } from "react";
+// import './TodoListStyle.css';
+// import { Button, Container, FormControl, TextField } from "@mui/material";
+
+// const TodoList = ({addtodo}) => {
+//     const[activity,setActivity]=useState("");
+
+//     const handleSubmit= (e)=>{
+//         e.preventDefault();
+//         addtodo(activity);
+//     }
+//   return (
+//     <div>
+//         <h3>My Todo List</h3>
+//       <Container maxWidth="sm">
+//         <form onSubmit={handleSubmit}>
+//         <FormControl fullWidth={true}>
+//           <TextField label="Create Activity" required={true} value={activity} onChange={(e)=>{
+//             setActivity(e.target.value)
+//           }}/>
+//           <div className="btnContainer">
+//           <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
+//             ADD
+//           </Button>
+//           <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
+//             Update
+//           </Button>
+//           </div>
+//         </FormControl>
+//         </form>
+//       </Container>
+//     </div>
+//   );
+// };
+
+// export default TodoList;
+
+//////////////////////////////////////////////////////
+import React, { useState } from "react";
 import './TodoListStyle.css';
 import { Button, Container, FormControl, TextField } from "@mui/material";
 
-const TodoList = () => {
+const TodoList = ({addtodo}) => {
+    const[activity,setActivity]=useState("");
+    const [addActivity,setAddActivity]=useState([])
+
+    const addData =()=>{
+        // setAddActivity([...addActivity,activity])
+        // console.log(addActivity);
+        setAddActivity((addActivity)=>{
+            const updatedList=[...addActivity,activity]
+            console.log(updatedList);
+            setActivity("");
+            return updatedList;
+        })
+    }
   return (
     <div>
         <h3>My Todo List</h3>
       <Container maxWidth="sm">
+        <form >
         <FormControl fullWidth={true}>
-          <TextField label="Create Activity" required={true} />
-          <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px"}}>
+          <TextField label="Create Activity" required={true} value={activity} onChange={(e)=>{
+            setActivity(e.target.value)
+          }}/>
+          <div className="btnContainer">
+          <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}} onClick={addData}>
             ADD
           </Button>
+          <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
+            Update
+          </Button>
+          </div>
         </FormControl>
+        </form>
       </Container>
     </div>
   );
@@ -21,7 +81,19 @@ const TodoList = () => {
 export default TodoList;
 
 
-////////////
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////
 // import React, { useState } from 'react'
 // const TodoList = () => {
 //   const [input,setInput]= useState("");
