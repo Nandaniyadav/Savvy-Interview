@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import "./TodoListStyle.css";
-import {Button,Card,Container,FormControl,TextField,IconButton,CardContent,Typography,} from "@mui/material";
+import {
+  Button,
+  Card,
+  Container,
+  FormControl,
+  TextField,
+  IconButton,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -10,7 +19,6 @@ const TodoList = () => {
   const [addActivity, setAddActivity] = useState([]);
   const [updateDataList, setUpdateDataList] = useState(null);
 
- 
   const addData = () => {
     if (!activity) {
       alert("Please fill in something into the input box");
@@ -29,13 +37,13 @@ const TodoList = () => {
     }
   };
 
-  // Delete data Todo List code
-  const removeActivity = (index) => {
-    const newArr = addActivity.filter(( id) => index !== id);
+  function removeData(i) {
+    let newArr = addActivity.filter((ele, id) => {
+      return i != id;
+    });
     setAddActivity(newArr);
-  };
+  }
 
-  // Edit data List code
   const editItem = (index) => {
     setUpdateDataList(index);
     setActivity(addActivity[index]);
@@ -79,8 +87,9 @@ const TodoList = () => {
                     type="button"
                     style={{
                       marginTop: "10px",
-                      width: "50%",background:"#f3d052",
-                      color:"#393c3d;"
+                      width: "50%",
+                      color: "#393c3d",
+                      background: "#f3d052",
                     }}
                     onClick={() => {
                       setActivity("");
@@ -96,43 +105,43 @@ const TodoList = () => {
         </Container>
       </div>
       <div>
-        <h3 style={{ marginTop: "30px" }}>Here is my Todo List</h3>
-        {addActivity.map((val, i) => {
-          return (
-            <Container key={i}>
-              <Card
-                variant="outlined"
-                style={{ marginTop: "35px", background: "lightgray" }}
-              >
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    {/* check icon button */}
-                    <IconButton style={{ float: "left" }}>
-                      <CheckIcon style={{ color: "green" }} />
-                    </IconButton>
-                    {val}
-                    <IconButton
-                      style={{ float: "right", marginRight: "10px" }}
-                      onClick={() => editItem(i)}
-                    >
-                      <BorderColorIcon style={{ color: "blue" }} />
-                    </IconButton>
-                    <IconButton
-                      style={{ float: "right" }}
-                      onClick={() => removeActivity(i)}
-                    >
-                      <DeleteForeverIcon style={{ color: "red" }} />
-                    </IconButton>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Container>
-          );
-        })}
+        <div>
+          <h3 style={{ marginTop: "30px" }}>Here is my Todo List</h3>
+          {addActivity.map((val, i) => {
+            return (
+              <Container key={i}>
+                <Card
+                  variant="outlined"
+                  style={{ marginTop: "35px", background: "lightgray" }}
+                >
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      <IconButton style={{ float: "left" }}>
+                        <CheckIcon style={{ color: "green" }} />
+                      </IconButton>
+                      {val}
+                      <IconButton
+                        style={{ float: "right", marginRight: "10px" }}
+                        onClick={() => editItem(i)}
+                      >
+                        <BorderColorIcon style={{ color: "blue" }} />
+                      </IconButton>
+                      <IconButton
+                        style={{ float: "right" }}
+                        onClick={() => removeData(i)}
+                      >
+                        <DeleteForeverIcon style={{ color: "red" }} />
+                      </IconButton>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Container>
+            );
+          })}
+        </div>
       </div>
     </>
   );
 };
 
 export default TodoList;
-

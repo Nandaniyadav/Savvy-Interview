@@ -1,58 +1,54 @@
-////////////////////////////////
-import React, { useState } from "react";
+// import React from 'react'
+
+// const TodoDataList = () => {
+//   return (
+//     <>
+//     <div>
+//           <h3 style={{ marginTop: "30px" }}>Here is my Todo List</h3>
+//           {addActivity.map((val, i) => {
+//             return (
+//               <Container key={i}>
+//                 <Card
+//                   variant="outlined"
+//                   style={{ marginTop: "35px", background: "lightgray" }}
+//                 >
+//                   <CardContent>
+//                     <Typography variant="h5" component="h2">
+//                       {/* check icon button */}
+//                       <IconButton style={{ float: "left" }}>
+//                         <CheckIcon style={{ color: "green" }} />
+//                       </IconButton>
+//                       {val}
+//                       <IconButton
+//                         style={{ float: "right", marginRight: "10px" }}
+//                         onClick={() => editItem(i)}
+//                       >
+//                         <BorderColorIcon style={{ color: "blue" }} />
+//                       </IconButton>
+//                       <IconButton
+//                         style={{ float: "right" }}
+//                         onClick={() => removeData(i)}
+//                       >
+//                         <DeleteForeverIcon style={{ color: "red" }} />
+//                       </IconButton>
+//                     </Typography>
+//                   </CardContent>
+//                 </Card>
+//               </Container>
+//             );
+//           })}
+//         </div>
+//     </>
+//   )
+// }
+
+// export default TodoDataList
+import React from 'react'
+
 const TodoDataList = () => {
-  const [input, setInput] = useState("");
-  const [addData, setAddData] = useState([]);
-  // function changehandle(e){
-  //   setInput(e.target.value);
-  //   console.log(e.target.value)
-
-  // }
-  function addActivity() {
-    // setAddData([...addData,input]);
-    // console.log(addData);
-    setAddData((addData) => {
-      const updatedList = [...addData, input];
-      console.log(updatedList);
-      setInput("");
-      return updatedList;
-    });
-  }
-  function removeData(i) {
-    let newArr = addData.filter((ele, id) => {
-      return i != id;
-    });
-    setAddData(newArr);
-  }
-
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="create activity"
-        value={input}
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-      <button onClick={addActivity}>Add Data</button>
-      <div className="container">
-        <h3> Here is your list</h3>
-        {addData.map((val, i) => {
-          return (
-            <>
-              <ul key={i}>
-                <li>
-                  {val}
-                  <button onClick={() => removeData(i)}>Remove Data</button>
-                </li>
-              </ul>
-            </>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+    <div>TodoDataList</div>
+  )
+}
 
-export default TodoDataList;
+export default TodoDataList
