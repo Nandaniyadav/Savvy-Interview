@@ -76,11 +76,11 @@ const TodoList = () => {
                   <Button
                     className="btnStyle"
                     variant="contained"
-                    color="primary"
                     type="button"
                     style={{
                       marginTop: "10px",
-                      width: "50%"
+                      width: "50%",background:"#f3d052",
+                      color:"#393c3d;"
                     }}
                     onClick={() => {
                       setActivity("");
