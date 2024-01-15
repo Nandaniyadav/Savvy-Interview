@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import "./TodoListStyle.css";
-import {
-  Button,
-  Card,
-  Container,
-  FormControl,
-  TextField,
-  IconButton,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import {Button,Card,Container,FormControl,TextField,IconButton,CardContent,Typography,} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -17,43 +8,42 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 const TodoList = () => {
   const [activity, setActivity] = useState("");
   const [addActivity, setAddActivity] = useState([]);
-  const [updateDataList, setUpdateDataList] = useState(true);
+  const [updateDataList, setUpdateDataList] = useState(null);
 
-  //   Add data in todo List code
+ 
   const addData = () => {
     if (!activity) {
-      alert("please filled something into input box");
+      alert("Please fill in something into the input box");
     } else {
-      setAddActivity((addActivity) => {
-        const updatedList = [...addActivity, activity];
-        console.log(updatedList);
+      if (updateDataList !== null) {
+        const updatedList = addActivity.map((item, index) =>
+          index === updateDataList ? activity : item
+        );
+        setAddActivity(updatedList);
         setActivity("");
-        return updatedList;
-      });
+        setUpdateDataList(null);
+      } else {
+        setAddActivity([...addActivity, activity]);
+        setActivity("");
+      }
     }
   };
 
-  //Delete data Todo List code
-
-  const removeActivity = (i) => {
-    const newArr = addActivity.filter((ele, id) => {
-      return id != i;
-    });
+  // Delete data Todo List code
+  const removeActivity = (index) => {
+    const newArr = addActivity.filter(( id) => index !== id);
     setAddActivity(newArr);
   };
 
   // Edit data List code
-  const editItem = (i) => {
-    let newEditUtem = addActivity.find((task) => {
-      return task.i == i;
-      setActivity(updateDataList.activity);
-    });
-    console.log(newEditUtem);
+  const editItem = (index) => {
+    setUpdateDataList(index);
+    setActivity(addActivity[index]);
   };
+
   return (
     <>
       <div>
-        {/* Todo Heading */}
         <h3 className="todoHeading">My Todo List</h3>
         <Container maxWidth="sm">
           <form>
@@ -67,12 +57,11 @@ const TodoList = () => {
                 }}
               />
               <div className="btnContainer">
-                {updateDataList }
                 <Button
                   className="btnStyle"
                   variant="contained"
                   color="primary"
-                  type="submit"
+                  type="button"
                   style={{
                     marginTop: "10px",
                     width: "50%",
@@ -81,8 +70,26 @@ const TodoList = () => {
                   }}
                   onClick={addData}
                 >
-                  ADD DATA
+                  {updateDataList !== null ? "Update" : "ADD DATA"}
                 </Button>
+                {setAddActivity !== null && (
+                  <Button
+                    className="btnStyle"
+                    variant="contained"
+                    color="primary"
+                    type="button"
+                    style={{
+                      marginTop: "10px",
+                      width: "50%"
+                    }}
+                    onClick={() => {
+                      setActivity("");
+                      setUpdateDataList(null);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                )}
               </div>
             </FormControl>
           </form>
@@ -92,40 +99,34 @@ const TodoList = () => {
         <h3 style={{ marginTop: "30px" }}>Here is my Todo List</h3>
         {addActivity.map((val, i) => {
           return (
-            <>
-              <ul key={i}>
-                <li>
-                  <Container>
-                    <Card
-                      variant="outlined"
-                      style={{ marginTop: "35px", background: "lightgray" }}
+            <Container key={i}>
+              <Card
+                variant="outlined"
+                style={{ marginTop: "35px", background: "lightgray" }}
+              >
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {/* check icon button */}
+                    <IconButton style={{ float: "left" }}>
+                      <CheckIcon style={{ color: "green" }} />
+                    </IconButton>
+                    {val}
+                    <IconButton
+                      style={{ float: "right", marginRight: "10px" }}
+                      onClick={() => editItem(i)}
                     >
-                      <CardContent>
-                        <Typography variant="h5" component="h2">
-                          {/* check icon button */}
-                          <IconButton style={{ float: "left" }}>
-                            <CheckIcon style={{ color: "green" }} />
-                          </IconButton>
-                          {val}
-                          <IconButton style={{ float: "right" }}>
-                            <DeleteForeverIcon
-                              style={{ color: "red" }}
-                              onClick={() => removeActivity(i)}
-                            />
-                          </IconButton>
-                          <IconButton style={{ float: "right" }}>
-                            <BorderColorIcon
-                              style={{ color: "red" }}
-                              onClick={() => editItem(i)}
-                            />
-                          </IconButton>
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Container>
-                </li>
-              </ul>
-            </>
+                      <BorderColorIcon style={{ color: "blue" }} />
+                    </IconButton>
+                    <IconButton
+                      style={{ float: "right" }}
+                      onClick={() => removeActivity(i)}
+                    >
+                      <DeleteForeverIcon style={{ color: "red" }} />
+                    </IconButton>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Container>
           );
         })}
       </div>
@@ -134,3 +135,4 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
