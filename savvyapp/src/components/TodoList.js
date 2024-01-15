@@ -1,150 +1,120 @@
-// import React, { useState } from "react";
-// import './TodoListStyle.css';
-// import { Button, Container, FormControl, TextField } from "@mui/material";
-
-// const TodoList = ({addtodo}) => {
-//     const[activity,setActivity]=useState("");
-
-//     const handleSubmit= (e)=>{
-//         e.preventDefault();
-//         addtodo(activity);
-//     }
-//   return (
-//     <div>
-//         <h3>My Todo List</h3>
-//       <Container maxWidth="sm">
-//         <form onSubmit={handleSubmit}>
-//         <FormControl fullWidth={true}>
-//           <TextField label="Create Activity" required={true} value={activity} onChange={(e)=>{
-//             setActivity(e.target.value)
-//           }}/>
-//           <div className="btnContainer">
-//           <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
-//             ADD
-//           </Button>
-//           <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
-//             Update
-//           </Button>
-//           </div>
-//         </FormControl>
-//         </form>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// export default TodoList;
-
-//////////////////////////////////////////////////////
 import React, { useState } from "react";
-import './TodoListStyle.css';
-import { Button, Container, FormControl, TextField } from "@mui/material";
+import "./TodoListStyle.css";
+import {Button,Card,Container,FormControl,TextField,IconButton, CardContent,Typography,
+} from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-const TodoList = ({addtodo}) => {
-    const[activity,setActivity]=useState("");
-    const [addActivity,setAddActivity]=useState([])
+const TodoList = () => {
+  const [activity, setActivity] = useState("");
+  const [addActivity, setAddActivity] = useState([]);
+  const [editDataList, setEditDataList] = useState(null);
 
-    const addData =()=>{
-        // setAddActivity([...addActivity,activity])
-        // console.log(addActivity);
-        setAddActivity((addActivity)=>{
-            const updatedList=[...addActivity,activity]
-            console.log(updatedList);
-            setActivity("");
-            return updatedList;
-        })
-    }
+//   Add data in todo List code
+  const addData = () => {
+    // setAddActivity([...addActivity,activity])
+    // console.log(addActivity);
+    setAddActivity((addActivity) => {
+      const updatedList = [...addActivity, activity];
+      console.log(updatedList);
+      setActivity("");
+      return updatedList;
+    });
+  };
+
+  //Delete data Todo List code
+
+  const removeActivity = (i) => {
+    const newArr = addActivity.filter((ele, id) => {
+      return i != id;
+    });
+    setAddActivity(newArr);
+  };
+
+  // Edit data List code
+  const updateData = (i) => {
+    setActivity(addActivity[i]);
+    setEditDataList(i);
+  };
   return (
-    <div>
-        <h3>My Todo List</h3>
-      <Container maxWidth="sm">
-        <form >
-        <FormControl fullWidth={true}>
-          <TextField label="Create Activity" required={true} value={activity} onChange={(e)=>{
-            setActivity(e.target.value)
-          }}/>
-          <div className="btnContainer">
-          <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}} onClick={addData}>
-            ADD
-          </Button>
-          <Button className="btnStyle" variant="contained" color="primary" type="submit" style={{marginTop:"10px",width:"50%"}}>
-            Update
-          </Button>
-          </div>
-        </FormControl>
-        </form>
-      </Container>
-    </div>
+    <>
+      <div>
+        {/* Todo Heading */}
+        <h3 className="todoHeading">My Todo List</h3>
+        <Container maxWidth="sm">
+          <form>
+            <FormControl fullWidth={true}>
+              <TextField
+                label="Create Activity"
+                required={true}
+                value={activity}
+                onChange={(e) => {
+                  setActivity(e.target.value);
+                }}
+              />
+              <div className="btnContainer">
+                <Button
+                  className="btnStyle"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  style={{ marginTop: "10px", width: "50%" }}
+                  onClick={addData}
+                >
+                  ADD DATA
+                </Button>
+                <Button
+                  className="btnStyle"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  style={{ marginTop: "10px", width: "50%" }}
+                  onClick={updateData}
+                >
+                  EDIT DATA
+                </Button>
+              </div>
+            </FormControl>
+          </form>
+        </Container>
+      </div>
+      <div>
+        <h3 style={{ marginTop: "30px" }}>Here is my Todo List</h3>
+        {addActivity.map((val, i) => {
+          return (
+            <>
+              <ul key={i}>
+                <li>
+                  <Container>
+                    <Card
+                      variant="outlined"
+                      style={{ marginTop: "35px", background: "lightgray" }}
+                    >
+                      <CardContent>
+                        <Typography variant="h5" component="h2">
+                          {/* check icon button */}
+                          <IconButton style={{ float: "left" }}>
+                            <CheckIcon style={{ color: "green" }} />
+                          </IconButton>
+                          {val}
+                          <IconButton style={{ float: "right" }}>
+                            <DeleteForeverIcon
+                              style={{ color: "red" }}
+                              onClick={() => removeActivity(i)}
+                            />
+                          </IconButton>
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Container>
+                </li>
+              </ul>
+            </>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
 export default TodoList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////
-// import React, { useState } from 'react'
-// const TodoList = () => {
-//   const [input,setInput]= useState("");
-//   const [addData,setAddData]=useState([]);
-//   // function changehandle(e){
-//   //   setInput(e.target.value);
-//   //   console.log(e.target.value)
-
-//   // }
-//   function addActivity(){
-//     // setAddData([...addData,input]);
-//     // console.log(addData);
-//     setAddData((addData)=>{
-//       const updatedList=[...addData,input]
-//       console.log(updatedList);
-//       setInput("");
-//       return updatedList;
-//     })
-//   }
-//   function removeData(i){
-//     let newArr =addData.filter((ele,id)=>{
-//       return(
-//         i != id
-//       )
-//     })
-//     setAddData(newArr);
-//   }
-  
-//   return (
-//     <div>
-//       <input type='text' placeholder='create activity' value={input} onChange={(e)=>{
-//         setInput(e.target.value);
-//       }}/>
-//       <button onClick={addActivity}>Add Data</button>
-//       <div className='container'>
-//         <h3> Here is your list</h3>
-//         {addData.map((val,i)=>{
-//           return(
-//             <>
-//             <ul key={i}>
-//               <li>{val}
-//               <button onClick={()=>removeData(i)}>Remove Data</button>
-//               </li>
-//             </ul>
-//             </>
-//           )
-//         })}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default TodoList
-
