@@ -1,42 +1,53 @@
 import React, { useState } from "react";
 import "./TodoListStyle.css";
-import {Button,Card,Container,FormControl,TextField,IconButton, CardContent,Typography,
+import {
+  Button,
+  Card,
+  Container,
+  FormControl,
+  TextField,
+  IconButton,
+  CardContent,
+  Typography,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const TodoList = () => {
   const [activity, setActivity] = useState("");
   const [addActivity, setAddActivity] = useState([]);
   const [updateDataList, setUpdateDataList] = useState(true);
 
-//   Add data in todo List code
+  //   Add data in todo List code
   const addData = () => {
-    // setAddActivity([...addActivity,activity])
-    // console.log(addActivity);
-    setAddActivity((addActivity) => {
-      const updatedList = [...addActivity, activity];
-      console.log(updatedList);
-      setActivity("");
-      return updatedList;
-    });
+    if (!activity) {
+      alert("please filled something into input box");
+    } else {
+      setAddActivity((addActivity) => {
+        const updatedList = [...addActivity, activity];
+        console.log(updatedList);
+        setActivity("");
+        return updatedList;
+      });
+    }
   };
 
   //Delete data Todo List code
 
   const removeActivity = (i) => {
     const newArr = addActivity.filter((ele, id) => {
-      return i != id;
+      return id != i;
     });
     setAddActivity(newArr);
   };
 
   // Edit data List code
   const editItem = (i) => {
-    let newEditUtem=addActivity.find((elem)=>{
-        return elem.id === i;
-    })
+    let newEditUtem = addActivity.find((task) => {
+      return task.i == i;
+      setActivity(updateDataList.activity);
+    });
     console.log(newEditUtem);
   };
   return (
@@ -48,7 +59,7 @@ const TodoList = () => {
           <form>
             <FormControl fullWidth={true}>
               <TextField
-                label="Create Activity"
+                label="What is the task today"
                 required={true}
                 value={activity}
                 onChange={(e) => {
@@ -56,12 +67,18 @@ const TodoList = () => {
                 }}
               />
               <div className="btnContainer">
+                {updateDataList }
                 <Button
                   className="btnStyle"
                   variant="contained"
                   color="primary"
                   type="submit"
-                  style={{ marginTop: "10px", width: "50%",background:"#f3d052",color: "#393c3d" }}
+                  style={{
+                    marginTop: "10px",
+                    width: "50%",
+                    background: "#f3d052",
+                    color: "#393c3d",
+                  }}
                   onClick={addData}
                 >
                   ADD DATA
@@ -99,7 +116,8 @@ const TodoList = () => {
                           <IconButton style={{ float: "right" }}>
                             <BorderColorIcon
                               style={{ color: "red" }}
-                              onClick={()=>editItem(i)}/>
+                              onClick={() => editItem(i)}
+                            />
                           </IconButton>
                         </Typography>
                       </CardContent>
