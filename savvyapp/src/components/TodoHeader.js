@@ -3,8 +3,8 @@ import './TodoHeaderStyle.css'
 
 const TodoHeader = () => {
   return (
-    <div className='container'>
-        <p>We love <span style={{color:"red"}}>❤</span> Savvy</p>
+    <div className='headerContainer'>
+        <p className='headerTxt'>We love <span style={{color:"red"}}>❤</span> Savvy</p>
     </div>
   )
 }

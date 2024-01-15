@@ -4,11 +4,12 @@ import {Button,Card,Container,FormControl,TextField,IconButton, CardContent,Typo
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const TodoList = () => {
   const [activity, setActivity] = useState("");
   const [addActivity, setAddActivity] = useState([]);
-  const [editDataList, setEditDataList] = useState(null);
+  const [updateDataList, setUpdateDataList] = useState(true);
 
 //   Add data in todo List code
   const addData = () => {
@@ -32,9 +33,11 @@ const TodoList = () => {
   };
 
   // Edit data List code
-  const updateData = (i) => {
-    setActivity(addActivity[i]);
-    setEditDataList(i);
+  const editItem = (i) => {
+    let newEditUtem=addActivity.find((elem)=>{
+        return elem.id === i;
+    })
+    console.log(newEditUtem);
   };
   return (
     <>
@@ -58,20 +61,10 @@ const TodoList = () => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  style={{ marginTop: "10px", width: "50%" }}
+                  style={{ marginTop: "10px", width: "50%",background:"#f3d052",color: "#393c3d" }}
                   onClick={addData}
                 >
                   ADD DATA
-                </Button>
-                <Button
-                  className="btnStyle"
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  style={{ marginTop: "10px", width: "50%" }}
-                  onClick={updateData}
-                >
-                  EDIT DATA
                 </Button>
               </div>
             </FormControl>
@@ -102,6 +95,11 @@ const TodoList = () => {
                               style={{ color: "red" }}
                               onClick={() => removeActivity(i)}
                             />
+                          </IconButton>
+                          <IconButton style={{ float: "right" }}>
+                            <BorderColorIcon
+                              style={{ color: "red" }}
+                              onClick={()=>editItem(i)}/>
                           </IconButton>
                         </Typography>
                       </CardContent>

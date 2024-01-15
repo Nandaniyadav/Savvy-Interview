@@ -3,11 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
-.container{
+.headerContainer{
+    height: 70px;
     background-color: #fece23;
     margin-bottom: 50px;
+    line-height: 70px;
 }
 p{
     font-size: 35px;
     color: #393c3d;
+   /* -webkit-text-stroke: 0.1vw #393c3d; */
+    font-weight: 500;
+    position: relative;
+    /* text-transform: uppercase; */
 }
