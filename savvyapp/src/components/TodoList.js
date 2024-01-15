@@ -72,9 +72,11 @@ const TodoList = () => {
                   type="button"
                   style={{
                     marginTop: "10px",
-                    width: "50%",
-                    background: "#f3d052",
+                    width: "47%",
+                    background: "#fece23",
                     color: "#393c3d",
+                    marginRight:"6%",
+                    fontWeight:"600"
                   }}
                   onClick={addData}
                 >
@@ -87,9 +89,10 @@ const TodoList = () => {
                     type="button"
                     style={{
                       marginTop: "10px",
-                      width: "50%",
+                      width: "47%",
                       color: "#393c3d",
-                      background: "#f3d052",
+                      background: "#fece23",
+                      fontWeight:"600"
                     }}
                     onClick={() => {
                       setActivity("");
