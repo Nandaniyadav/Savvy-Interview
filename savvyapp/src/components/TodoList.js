@@ -130,7 +130,9 @@ const TodoList = () => {
                         style={{ float: "right" }}
                         onClick={() => removeData(i)}
                       >
-                        <DeleteForeverIcon style={{ color: "red" }} />
+                        <DeleteForeverIcon
+                          style={{ color: "red", marginRight: "20px" }}
+                        />
                       </IconButton>
                     </Typography>
                   </CardContent>

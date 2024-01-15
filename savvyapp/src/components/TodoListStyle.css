@@ -1,17 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.todoHeading{
+.todoHeading {
     font-size: 30px;
     color: #393c3d;
     margin-bottom: 10px;
 }
-.btnStyle{
+
+.btnStyle {
     height: 40px;
     background-color: #f3d052;
     color: #393c3d;
-    
+    font-family: bold;
+
 }
