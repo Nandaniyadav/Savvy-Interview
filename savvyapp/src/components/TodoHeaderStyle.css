@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    background-color: #fece23;
+    margin-bottom: 50px;
+}
+p{
+    font-size: 35px;
+    color: #393c3d;
+}
